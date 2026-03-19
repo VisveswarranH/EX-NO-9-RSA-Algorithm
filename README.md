@@ -1,4 +1,6 @@
 # EX-NO-9-RSA-Algorithm
+## NAME:VISVESWARRAN HARIKRISHNAN
+## REG :212224110063
 
 ## AIM:
 To Implement RSA Encryption Algorithm in Cryptography
@@ -36,13 +38,48 @@ Step 5: **Security Foundation
 The security of RSA relies on the difficulty of factoring large numbers; thus, choosing sufficiently large prime numbers for \( p \) and \( q \) is crucial for security.
 
 ## Program:
+```
+def gcd(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return a
+def mod_inverse(e, phi):
+    for d in range(1, phi):
+        if (e * d) % phi == 1:
+            return d
+    return None
 
+p = int(input("Enter prime number p: "))
+q = int(input("Enter prime number q: "))
+
+n = p * q
+
+phi = (p - 1) * (q - 1)
+
+e = int(input("Enter public key e (coprime with phi): "))
+
+if gcd(e, phi) != 1:
+    print("e is not coprime with phi. Choose another e.")
+    exit()
+
+d = mod_inverse(e, phi)
+
+print("Public Key (e, n):", (e, n))
+print("Private Key (d, n):", (d, n))
+
+m = int(input("Enter message (number < n): "))
+c = (m ** e) % n
+print("Encrypted message:", c)
+
+m_decrypted = (c ** d) % n
+print("Decrypted message:", m_decrypted)
+```
 
 
 
 ## Output:
 
-
+<img width="1619" height="907" alt="image" src="https://github.com/user-attachments/assets/c5fe55e0-5b9b-4cf6-ba3c-d2210fc5f812" />
 
 ## Result:
  The program is executed successfully.
